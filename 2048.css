@@ -1,4 +1,6 @@
 header {
+    position: absolute;
+    left: 0;
 	display: block;
 	margin: 0 auto;
 	width: 500px;
