@@ -1,8 +1,34 @@
 var board = [];
 var score = 0;
+
+var startx = 0;
+var starty = 0;
+var endx = 0;
+var endy = 0;
+
 $(function() {
+    prepareForMobile();
     newGame();
 });
+
+function prepareForMobile () {
+
+    if (documentWidth > 500) {
+        gridContainerWidth = 500;
+        cellSideLength = 100;
+        cellSpace = 20;
+        // $('header').css('position', 'absolute').css('left', '0').width(500);
+    }
+
+    $('#grid-container').css('width', gridContainerWidth - 2 * cellSpace);
+    $('#grid-container').css('height', gridContainerWidth - 2 * cellSpace);
+    $('#grid-container').css('padding', cellSpace);
+    $('#grid-container').css('borderRadius', 0.02 * gridContainerWidth);
+
+    $('.grid-cell').css('width', cellSideLength);
+    $('.grid-cell').css('height', cellSideLength);
+    $('.grid-cell').css('borderRadius', 0.02 * cellSideLength);
+} 
 
 function newGame() {
     init();
@@ -41,11 +67,11 @@ function updateBoardView() {
             if (board[i][j] === 0) {
                 theNumberCell.css('width', '0px');
                 theNumberCell.css('height', '0px');
-                theNumberCell.css('top', getPosTop(i, j) + 50);
-                theNumberCell.css('left', getPosLeft(i, j) + 50);
+                theNumberCell.css('top', getPosTop(i, j) + cellSideLength / 2);
+                theNumberCell.css('left', getPosLeft(i, j) + cellSideLength / 2);
             } else {
-                theNumberCell.css('width', '100px');
-                theNumberCell.css('height', '100px');
+                theNumberCell.css('width', cellSideLength);
+                theNumberCell.css('height', cellSideLength);
                 theNumberCell.css('top', getPosTop(i, j));
                 theNumberCell.css('left', getPosLeft(i, j));
                 theNumberCell.css('background', getNumberBackgroundColor(board[i][j]));
@@ -54,6 +80,8 @@ function updateBoardView() {
             }
         }
     }
+    $('.number-cell').css('line-height', cellSideLength+ 'px');
+    $('.number-cell').css('font-size', 0.6 * cellSideLength+ 'px');
 }
 
 function generateOneNumber() {
@@ -63,16 +91,28 @@ function generateOneNumber() {
 
     var randx = parseInt(Math.floor(Math.random() * 4));
     var randy = parseInt(Math.floor(Math.random() * 4));
-
-    while (true) {
+    // 定义循环５０次　若没找到，则手动设置随机的位置
+    var times = 0;
+    while (times < 50) {
         if (board[randx][randy] === 0) {
             break;
         }
         randx = parseInt(Math.floor(Math.random() * 4));
         randy = parseInt(Math.floor(Math.random() * 4));
+        times++;
+    }
+    if (times === 50) {
+        for (var i = 0; i < 4; i++) {
+            for (var j = 0; j < 4; j++) {
+                if (board[i][j] === 0) {
+                    randx = i;
+                    randy = j;
+                }
+            }
+        }
     }
 
-    var randNumber = Math.random() < 0.5 ? 2 : 4;
+    var randNumber = Math.random() < 0.6667 ? 2 : 4;
 
     board[randx][randy] = randNumber;
 
@@ -83,28 +123,33 @@ function generateOneNumber() {
 
 
 $(document).keydown(function(event) {
+    
     switch (event.keyCode) {
         case 37: // left
+            event.preventDefault();
+            setTimeout("generateOneNumber()", 210);
             if (moveLeft()) {
-                setTimeout("generateOneNumber()",210);
                 setTimeout("isgameover()", 300);
             }
             break;
         case 38: // up
+            event.preventDefault();
+            setTimeout("generateOneNumber()", 210);
             if (moveUp()) {
-                setTimeout("generateOneNumber()",210);
                 setTimeout("isgameover()", 300);
             }
             break;
         case 39: // right
+            event.preventDefault();
+            setTimeout("generateOneNumber()", 210);
             if (moveRight()) {
-                setTimeout("generateOneNumber()",210);
                 setTimeout("isgameover()", 300);
             }
             break;
         case 40: // down
+            event.preventDefault();
+            setTimeout("generateOneNumber()", 210);
             if (moveDown()) {
-                setTimeout("generateOneNumber()",210);
                 setTimeout("isgameover()", 300);
             }
             break;
@@ -113,6 +158,64 @@ $(document).keydown(function(event) {
     }
 });
 
+document.addEventListener('touchstart', function (event) {
+    event.preventDefault();
+    startx = event.touches[0].pageX;
+    starty = event.touches[0].pageY;
+});
+
+document.addEventListener('touchmove', function (event) {
+    event.preventDefault();
+});
+
+document.addEventListener('touchend', function (event) {
+
+    endx = event.changedTouches[0].pageX;
+    endy = event.changedTouches[0].pageY;
+
+
+    var deltax = endx - startx;
+    var deltay = endy - starty;
+
+    if (Math.abs(deltax) < 0.1 * documentWidth && Math.abs(deltay) < 0.1 * documentWidth) {
+        return;
+    }
+
+    if (Math.abs(deltax) > Math.abs(deltay)) {
+        // x
+        if (deltax > 0)　{
+            // right
+            setTimeout("generateOneNumber()", 210);
+            if (moveRight()) {
+                setTimeout("isgameover()", 300);
+            }
+        } else {
+            // left
+            setTimeout("generateOneNumber()", 210);
+            if (moveLeft()) {
+                setTimeout("isgameover()", 300);
+            }
+        }
+    } else {
+        // y
+        if (deltay < 0) {
+            // up
+            setTimeout("generateOneNumber()", 210);
+            if (moveUp()) {
+                setTimeout("isgameover()", 300);
+            }
+        } else {
+            // down
+            setTimeout("generateOneNumber()", 210);
+            if (moveDown()) {
+                setTimeout("isgameover()", 300);
+            }
+        }
+    }
+
+});
+
+
 function isgameover() {
     if (nospace(board) && nomove(board)) {
         gameover();
@@ -120,7 +223,7 @@ function isgameover() {
 }
 
 function gameover() {
-    if(confirm('Game Over! \n Again?')){
+    if (confirm('Game Over! \n Again?')) {
         newGame();
     }
 }

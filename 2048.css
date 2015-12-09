@@ -1,21 +1,20 @@
 header {
-    position: absolute;
-    left: 0;
 	display: block;
 	margin: 0 auto;
-	width: 500px;
+	width: 100%;
 	text-align: center;
 }
 
 header h1 {
 	font-family: Arial;
-	font-size: 60px;
+	font-size: 40px;
 	font-weight: bold;
+    margin: 0;
 }
 
 header #newgamebutton {
 	display: block;
-	margin: 20px auto;
+	margin: 10px auto;
 	width: 100px;
 	padding: 10px 10px;
 	background: #8f7a66;
@@ -31,15 +30,15 @@ header #newgamebutton:hover {
 
 header p {
 	font-family: Arial;
-	font-size: 25px;
-	margin: 20px auto;
+	font-size: 16px;
+	margin: 10px auto;
 }
 
 #grid-container {
 	width: 460px;
 	height: 460px;
 	padding: 20px;
-	margin: 50px auto;
+	margin: 30px auto;
 	background: #bbada0;
 	border-radius: 10px;
 	position: relative;
@@ -57,7 +56,6 @@ header p {
 	border-radius: 6px;
 	background: #ccc0b3;
 	text-align: center;
-	line-height: 100px;
 	font-size: 60px;
 	font-family: Arial;
 	font-weight: bold;
