@@ -11,6 +11,12 @@ $(function() {
     newGame();
 });
 
+$('#newgamebutton').on('click', function(event) {
+    event.preventDefault();
+    prepareForMobile();
+    newGame();
+});
+
 function prepareForMobile () {
 
     if (documentWidth > 500) {
