@@ -84,9 +84,9 @@ function updateBoardView() {
                 theNumberCell.css('color', getNumberColor(board[i][j]));
                 theNumberCell.text(board[i][j]);
                 if (parseInt(theNumberCell.text()) > 64 && parseInt(theNumberCell.text()) < 1024) {
-                    theNumberCell.css('fontSize', 30);
+                    theNumberCell.css('fontSize', 0.5 * cellSideLength);
                 } else if (parseInt(theNumberCell.text()) >= 1024)　{
-                    theNumberCell.css('fontSize', 20);
+                    theNumberCell.css('fontSize', 0.4 * cellSideLength);
                 }
             }
         }
