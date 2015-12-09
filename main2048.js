@@ -36,6 +36,7 @@ function prepareForMobile () {
 
 function newGame() {
     init();
+    updataScore(score);
     generateOneNumber();
     generateOneNumber();
 }
