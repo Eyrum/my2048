@@ -32,7 +32,6 @@ function prepareForMobile () {
 
     $('.grid-cell').css('width', cellSideLength);
     $('.grid-cell').css('height', cellSideLength);
-    $('.grid-cell').css('borderRadius', 0.02 * cellSideLength);
 } 
 
 function newGame() {
