@@ -145,4 +145,3 @@ function noBlockHorizontalY　(col, row1, row2, board) {
     }
     return true;
 }
-

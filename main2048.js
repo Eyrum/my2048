@@ -17,7 +17,6 @@ function prepareForMobile () {
         gridContainerWidth = 500;
         cellSideLength = 100;
         cellSpace = 20;
-        // $('header').css('position', 'absolute').css('left', '0').width(500);
     }
 
     $('#grid-container').css('width', gridContainerWidth - 2 * cellSpace);
