@@ -82,11 +82,13 @@ function updateBoardView() {
                 theNumberCell.css('background', getNumberBackgroundColor(board[i][j]));
                 theNumberCell.css('color', getNumberColor(board[i][j]));
                 theNumberCell.text(board[i][j]);
+                if (parseInt(theNumberCell.text()) > 1024) {
+                    theNumberCell.css('fontSize', 40);
+                }
             }
         }
     }
     $('.number-cell').css('line-height', cellSideLength+ 'px');
-    $('.number-cell').css('font-size', 0.6 * cellSideLength+ 'px');
 }
 
 function generateOneNumber() {
