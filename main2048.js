@@ -83,10 +83,10 @@ function updateBoardView() {
                 theNumberCell.css('background', getNumberBackgroundColor(board[i][j]));
                 theNumberCell.css('color', getNumberColor(board[i][j]));
                 theNumberCell.text(board[i][j]);
-                if (parseInt(theNumberCell.text()) > 64 && parseInt(theNumberCell.text()) < 1024) {
-                    theNumberCell.css('fontSize', 30);
-                } else if (parseInt(theNumberCell.text()) >= 1024)　{
-                    theNumberCell.css('fontSize', 20);
+                if (parseInt(theNumberCell.text()) > 2 && parseInt(theNumberCell.text()) < 8) {
+                    theNumberCell.css('fontSize', 0.5 * cellSideLength);
+                } else if (parseInt(theNumberCell.text()) >= 8)　{
+                    theNumberCell.css('fontSize', 0.4 * cellSideLength);
                 }
             }
         }
