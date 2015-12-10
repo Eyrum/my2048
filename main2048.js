@@ -1,5 +1,6 @@
 var board = [];
 var score = 0;
+var hasConficted = [];
 
 var startx = 0;
 var starty = 0;
@@ -52,8 +53,10 @@ function init() {
 
     for (var i = 0; i < 4; i++) {
         board[i] = [];
+        hasConficted[i] = [];
         for (var j = 0; j < 4; j++) {
             board[i][j] = 0;
+            hasConficted[i][j] = false;
         }
     }
     score = 0;
@@ -89,6 +92,7 @@ function updateBoardView() {
                     theNumberCell.css('fontSize', 0.4 * cellSideLength);
                 }
             }
+            hasConficted[i][j] = false;
         }
     }
     $('.number-cell').css('line-height', cellSideLength+ 'px');
@@ -252,7 +256,7 @@ function moveLeft() {
                         board[i][k] = board[i][j];
                         board[i][j] = 0;
                         continue;
-                    } else if (board[i][k] === board[i][j] && noBlockHorizontal(i, k, j, board)) {
+                    } else if (board[i][k] === board[i][j] && noBlockHorizontal(i, k, j, board) && !hasConficted[i][k]) {
                         // move
                         showMoveAnimation(i, j, i, k);
                         // add
@@ -261,6 +265,8 @@ function moveLeft() {
                         // add score
                         score += board[i][k];
                         updataScore(score);
+
+                        hasConficted[i][k] = true;
                         continue;
                     }
                 }
@@ -286,7 +292,7 @@ function moveUp() {
                         board[k][j] = board[i][j];
                         board[i][j] = 0;
                         continue;
-                    } else if (board[k][j] === board[i][j] && noBlockHorizontalY(j, k, i, board)) {
+                    } else if (board[k][j] === board[i][j] && noBlockHorizontalY(j, k, i, board) && !hasConficted[k][j]) {
                         // move
                         showMoveAnimation(i, j, k, j);
                         //add
@@ -294,6 +300,7 @@ function moveUp() {
                         board[i][j] = 0;
                         score += board[i][k];
                         updataScore(score);
+                        hasConficted[k][j] = true;
                         continue;
                     }
                 }
@@ -319,7 +326,7 @@ function moveRight() {
                         board[i][k] = board[i][j];
                         board[i][j] = 0;
                         continue;
-                    } else if (board[i][k] === board[i][j] && noBlockHorizontal(i, j, k, board)) {
+                    } else if (board[i][k] === board[i][j] && noBlockHorizontal(i, j, k, board) && !hasConficted[i][k]) {
                         // move
                         showMoveAnimation(i, j, i, k);
                         // add
@@ -327,6 +334,7 @@ function moveRight() {
                         board[i][j] = 0;
                         score += board[i][k];
                         updataScore(score);
+                        hasConficted[i][k] = true;
                         continue;
                     }
                 }
@@ -352,7 +360,7 @@ function moveDown() {
                         board[k][j] = board[i][j];
                         board[i][j] = 0;
                         continue;
-                    } else if (board[k][j] === board[i][j] && noBlockHorizontalY(j, i, k, board)) {
+                    } else if (board[k][j] === board[i][j] && noBlockHorizontalY(j, i, k, board) && !hasConficted[k][j]) {
                         // move 
                         showMoveAnimation(i, j, k, j);
                         // add 
@@ -360,6 +368,7 @@ function moveDown() {
                         board[i][j] = 0;
                         score += board[i][k];
                         updataScore(score);
+                        hasConficted[k][j] = true;
                         continue;
                     }
                 }
