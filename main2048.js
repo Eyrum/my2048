@@ -19,7 +19,6 @@ $('#newgamebutton').on('click', function(event) {
 });
 
 function prepareForMobile () {
-
     if (documentWidth > 500) {
         gridContainerWidth = 500;
         cellSideLength = 100;
@@ -141,30 +140,30 @@ $(document).keydown(function(event) {
     switch (event.keyCode) {
         case 37: // left
             event.preventDefault();
-            setTimeout("generateOneNumber()", 210);
+            setTimeout(generateOneNumber, 210);
             if (moveLeft()) {
-                setTimeout("isgameover()", 300);
+                setTimeout(isgameover, 300);
             }
             break;
         case 38: // up
             event.preventDefault();
-            setTimeout("generateOneNumber()", 210);
+            setTimeout(generateOneNumber, 210);
             if (moveUp()) {
-                setTimeout("isgameover()", 300);
+                setTimeout(isgameover, 300);
             }
             break;
         case 39: // right
             event.preventDefault();
-            setTimeout("generateOneNumber()", 210);
+            setTimeout(generateOneNumber, 210);
             if (moveRight()) {
-                setTimeout("isgameover()", 300);
+                setTimeout(isgameover, 300);
             }
             break;
         case 40: // down
             event.preventDefault();
-            setTimeout("generateOneNumber()", 210);
+            setTimeout(generateOneNumber, 210);
             if (moveDown()) {
-                setTimeout("isgameover()", 300);
+                setTimeout(isgameover, 300);
             }
             break;
         default:
@@ -198,30 +197,30 @@ document.addEventListener('touchend', function (event) {
         // x
         if (deltax > 0)　{
             // right
-            setTimeout("generateOneNumber()", 210);
+            setTimeout(generateOneNumber, 210);
             if (moveRight()) {
-                setTimeout("isgameover()", 300);
+                setTimeout(isgameover, 300);
             }
         } else {
             // left
-            setTimeout("generateOneNumber()", 210);
+            setTimeout(generateOneNumber, 210);
             if (moveLeft()) {
-                setTimeout("isgameover()", 300);
+                setTimeout(isgameover, 300);
             }
         }
     } else {
         // y
         if (deltay < 0) {
             // up
-            setTimeout("generateOneNumber()", 210);
+            setTimeout(generateOneNumber, 210);
             if (moveUp()) {
-                setTimeout("isgameover()", 300);
+                setTimeout(isgameover, 300);
             }
         } else {
             // down
-            setTimeout("generateOneNumber()", 210);
+            setTimeout(generateOneNumber, 210);
             if (moveDown()) {
-                setTimeout("isgameover()", 300);
+                setTimeout(isgameover, 300);
             }
         }
     }
@@ -273,7 +272,7 @@ function moveLeft() {
             }
         }
     }
-    setTimeout('updateBoardView()', 300);
+    setTimeout(updateBoardView, 300);
     return true;
 }
 
@@ -308,7 +307,7 @@ function moveUp() {
         }
     }
 
-    setTimeout('updateBoardView()', 300);
+    setTimeout(updateBoardView, 300);
     return true;
 }
 
@@ -341,7 +340,7 @@ function moveRight() {
             }
         }
     }
-    setTimeout('updateBoardView()', 300);
+    setTimeout(updateBoardView, 300);
     return true;
 }
 
@@ -375,6 +374,6 @@ function moveDown() {
             }
         }
     }
-    setTimeout('updateBoardView()', 300);
+    setTimeout(updateBoardView, 300);
     return true;
 }
