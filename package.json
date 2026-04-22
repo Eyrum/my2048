@@ -1,24 +1,20 @@
 {
   "name": "my2048",
-  "version": "1.0.0",
-  "description": "<a href=\"https://eyrum.github.io/my2048/\">2048</a>",
-  "main": "jquery.min.js",
+  "version": "2.0.0",
+  "description": "2048 game - pure JavaScript, no dependencies",
+  "main": "app.js",
   "scripts": {
-    "postinstall": "cp node_modules/jquery/dist/jquery.min.js jquery.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Eyrum/my2048.git"
   },
-  "keywords": [],
+  "keywords": ["2048", "game", "puzzle"],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Eyrum/my2048/issues"
   },
-  "homepage": "https://github.com/Eyrum/my2048#readme",
-  "dependencies": {
-    "jquery": "^4.0.0"
-  }
+  "homepage": "https://eyrum.github.io/my2048/"
 }
