@@ -51,8 +51,13 @@ class Game2048 {
 
         const cells = document.querySelectorAll('.grid-cell');
         cells.forEach(cell => {
+            const parts = cell.id.split('-');
+            const i = parseInt(parts[2]);
+            const j = parseInt(parts[3]);
             cell.style.width = this.cellSize + 'px';
             cell.style.height = this.cellSize + 'px';
+            cell.style.top = this.getPosTop(i, j) + 'px';
+            cell.style.left = this.getPosLeft(i, j) + 'px';
         });
 
         const nums = document.querySelectorAll('.number-cell');
@@ -114,7 +119,7 @@ class Game2048 {
         }
     }
 
-    createNumberCell(i, j, value) {
+    createNumberCell(i, j, value, isNew = false) {
         const cell = document.createElement('div');
         cell.className = 'number-cell';
         cell.id = `number-cell-${i}-${j}`;
@@ -127,7 +132,7 @@ class Game2048 {
         cell.style.color = TILE_TEXT_COLORS[value] || '#f9f6f2';
         cell.style.lineHeight = this.cellSize + 'px';
         cell.style.fontSize = this.getFontSize(value);
-        cell.classList.add('new');
+        if (isNew) cell.classList.add('new');
         this.gridContainer.appendChild(cell);
     }
 
@@ -150,7 +155,7 @@ class Game2048 {
         const pos = empties[Math.floor(Math.random() * empties.length)];
         const value = Math.random() < 0.6667 ? 2 : 4;
         this.board[pos.i][pos.j] = value;
-        this.createNumberCell(pos.i, pos.j, value);
+        this.createNumberCell(pos.i, pos.j, value, true);
         return true;
     }
 

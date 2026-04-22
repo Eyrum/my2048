@@ -95,7 +95,7 @@ header #newgamebutton:hover {
     width: 100px;
     height: 100px;
     border-radius: 6px;
-    background: var(--bg-cell-empty);
+    background: var(--bg-cell);
     position: absolute;
     z-index: 1;
 }
@@ -109,7 +109,7 @@ header #newgamebutton:hover {
     font-weight: bold;
     line-height: 100px;
     z-index: 2;
-    transition: transform 0.15s ease, width 0.1s ease, height 0.1s ease;
+    transition: top 0.15s ease, left 0.15s ease, width 0.1s ease, height 0.1s ease;
 }
 
 .number-cell.new {
